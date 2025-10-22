@@ -15,3 +15,6 @@ This project implements the Quantum Approximate Optimization Algorithm (QAOA) to
 ```bash
 git clone https://github.com/pradeepdegalaroyal/qml-rl-maxcut.git
 cd qml-rl-maxcut
+
+## Step 2: Install Dependencies
+pip install -r requirements.txt
