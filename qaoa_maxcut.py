@@ -56,11 +56,3 @@ def plot_graph(G, solution):
 print(f"Optimal Cut Value: {optimal_value:.2f}")
 print(f"Best Configuration: {solution}")
 plot_graph(G, solution)
-
-# CLI execution
-if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser(description="Run QAOA for Max-Cut with RL-inspired optimization.")
-    parser.add_argument("--nodes", type=int, default=4, help="Number of graph nodes")
-    args = parser.parse_args()
-    print(f"Running QAOA on {args.nodes}-node graph...")
