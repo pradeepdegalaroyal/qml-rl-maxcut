@@ -18,3 +18,15 @@ This project implements the Quantum Approximate Optimization Algorithm (QAOA) to
    git clone https://github.com/[yourusername]/qml-rl-maxcut.git
    cd qml-rl-maxcut
 2. Install dependencies : pip install -r requirements.txt
+Usage
+Run the QAOA script:
+bashpython qaoa_maxcut.py --nodes 4
+Output: Optimal cut value, configuration, and plot (maxcut_solution.png).
+Requirements
+
+Python 3.8+
+Qiskit 0.46.0
+NumPy, NetworkX, Matplotlib
+
+License
+MIT License
