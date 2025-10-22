@@ -1,6 +1,6 @@
 
 
-#### Corrected README.md
+#### README.md
 
 ```markdown
 # QML/RL-Inspired Max-Cut Optimization with QAOA
