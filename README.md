@@ -53,4 +53,14 @@ For questions or collaboration, reach out via [LinkedIn](https://linkedin.com/in
 ## License
 MIT License
 ```
-
+Instructions
+1. **GitHub Web**:
+   - Go to `https://github.com/pradeepdegalaroyal/qml-rl-maxcut`, edit `README.md`, paste above, commit:
+     - **Message**: `Fix README formatting and structure`
+     - **Description**: `Added Step 2, separated Usage, formatted lists, fixed code blocks.`
+     - **Commit to**: `main`.
+2. **Git CLI**:
+   ```bash
+   git add README.md
+   git commit -m "Fix README formatting and structure" -m "Added Step 2, separated Usage, formatted lists, fixed code blocks."
+   git push origin main
