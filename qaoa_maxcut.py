@@ -1,4 +1,3 @@
-# qaoa_maxcut.py
 """
 Quantum-Inspired RL Optimization for Max-Cut Problem using QAOA
 - Solves Max-Cut on a 4-node graph with Qiskit.
@@ -8,32 +7,40 @@ Quantum-Inspired RL Optimization for Max-Cut Problem using QAOA
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
-from qiskit import Aer
 from qiskit_algorithms import QAOA
 from qiskit_algorithms.optimizers import COBYLA
 from qiskit.primitives import Sampler
+from qiskit.quantum_info import SparsePauliOp
 
+# Define Max-Cut problem (4-node graph)
 G = nx.Graph()
 G.add_edges_from([(0, 1), (1, 2), (2, 3), (3, 0), (1, 3)])
 weights = {(i, j): 1.0 for i, j in G.edges}
 
+# Preprocess adjacency matrix for quantum operator
 def create_maxcut_operator(G, weights):
     n = G.number_of_nodes()
-    operator = np.zeros((2**n, 2**n))
+    terms = []
+    coeffs = []
     for i, j in G.edges:
         w = weights.get((i, j), 1.0)
-        for k in range(2**n):
-            if (k >> i) & 1 != (k >> j) & 1:
-                operator[k, k] += w
-    return operator
+        pauli_string = ['I'] * n
+        pauli_string[i] = 'Z'
+        pauli_string[j] = 'Z'
+        terms.append(''.join(pauli_string))
+        coeffs.append(w / 2)
+    return SparsePauliOp.from_list(list(zip(terms, coeffs)))
 
-backend = Aer.get_backend('qasm_simulator')
+# Set up QAOA
 qaoa = QAOA(optimizer=COBYLA(maxiter=100), reps=2, sampler=Sampler())
+
+# Run QAOA
 operator = create_maxcut_operator(G, weights)
 result = qaoa.compute_minimum_eigenvalue(operator)
-optimal_value = -result.eigenvalue
-optimal_params = result.optimal_parameters
+optimal_value = -result.eigenvalue.real
+solution = result.best_measurement['state']
 
+# Visualize results
 def plot_graph(G, solution):
     colors = ['r' if solution[node] == 0 else 'b' for node in G.nodes]
     pos = nx.spring_layout(G)
@@ -42,11 +49,11 @@ def plot_graph(G, solution):
     plt.savefig("maxcut_solution.png")
     plt.show()
 
-solution = result.best_measurement['state']
 print(f"Optimal Cut Value: {optimal_value:.2f}")
 print(f"Best Configuration: {solution}")
 plot_graph(G, solution)
 
+# CLI execution
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="Run QAOA for Max-Cut with RL-inspired optimization.")
