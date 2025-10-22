@@ -1,8 +1,4 @@
-
-
-#### README.md
-
-```markdown
+# README.md
 # QML/RL-Inspired Max-Cut Optimization with QAOA
 
 ## Overview
@@ -13,54 +9,45 @@ This project implements the Quantum Approximate Optimization Algorithm (QAOA) to
 - **Data Preprocessing**: Constructs adjacency matrix for quantum operators using NumPy.
 - **Visualization**: Generates Max-Cut solution plots with Matplotlib.
 - **CLI Support**: Customizable parameters via command-line interface (e.g., `--nodes`).
+- **Reproducibility**: Fully documented workflows with Jupyter-compatible outputs.
 
 ## Installation
 ### Step 1: Clone the Repository
 ```bash
 git clone https://github.com/pradeepdegalaroyal/qml-rl-maxcut.git
 cd qml-rl-maxcut
-```
-
-### Step 2: Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-## Usage
+Step 2: Install Dependencies
+bashpip install -r requirements.txt
+Usage
 Run the QAOA script:
-```bash
-python qaoa_maxcut.py --nodes 4
-```
-Output: Optimal cut value, configuration, and plot (`maxcut_solution.png`).
+bashpython qaoa_maxcut.py --nodes 4
+Output: Optimal cut value, configuration, and plot (maxcut_solution.png).
+Testing
+To verify in Google Colab:
+bash!pip install qiskit==0.46.0 qiskit-algorithms>=0.3.0 numpy>=1.24.0,<2.0.0 networkx>=3.2.1 matplotlib>=3.8.0
+!git clone https://github.com/pradeepdegalaroyal/qml-rl-maxcut.git
+%cd qml-rl-maxcut
+!python qaoa_maxcut.py --nodes 4
+from IPython.display import Image
+Image('maxcut_solution.png')
+Expected: Prints cut value, configuration, and displays a 4-node graph plot.
+Requirements
 
-## Requirements
-- Python 3.8+
-- Qiskit 0.46.0
-- Qiskit-algorithms 0.3.0
-- NumPy >=1.24.0
-- NetworkX >=3.2.1
-- Matplotlib >=3.8.0
+Python 3.8+
+Qiskit 0.46.0
+Qiskit-algorithms 0.3.0
+NumPy >=1.24.0,<2.0.0
+NetworkX >=3.2.1
+Matplotlib >=3.8.0
 
-## Repository Files
-- `qaoa_maxcut.py`: Main script implementing QAOA for Max-Cut with CLI support.
-- `requirements.txt`: Lists dependencies for reproducibility.
-- `.gitignore`: Ignores Python cache files and artifacts.
-- `LICENSE`: MIT License for open-source usage.
+Repository Files
 
-## Contact
-For questions or collaboration, reach out via [LinkedIn](https://linkedin.com/in/degala-chenchupradeep-811916176) or email: pradeepdegala143@gmail.com.
+qaoa_maxcut.py: Main script implementing QAOA for Max-Cut with CLI support.
+requirements.txt: Lists dependencies for reproducibility.
+.gitignore: Ignores Python cache files and artifacts.
+LICENSE: MIT License for open-source usage.
 
-## License
+Contact
+For questions or collaboration, reach out via LinkedIn or email: pradeepdegala143@gmail.com.
+License
 MIT License
-```
-Instructions
-1. **GitHub Web**:
-   - Go to `https://github.com/pradeepdegalaroyal/qml-rl-maxcut`, edit `README.md`, paste above, commit:
-     - **Message**: `Fix README formatting and structure`
-     - **Description**: `Added Step 2, separated Usage, formatted lists, fixed code blocks.`
-     - **Commit to**: `main`.
-2. **Git CLI**:
-   ```bash
-   git add README.md
-   git commit -m "Fix README formatting and structure" -m "Added Step 2, separated Usage, formatted lists, fixed code blocks."
-   git push origin main
