@@ -31,6 +31,10 @@ def create_maxcut_operator(G, weights):
         coeffs.append(w / 2)
     return SparsePauliOp.from_list(list(zip(terms, coeffs)))
 
+# Convert integer state to binary array
+def state_to_binary(state, num_nodes):
+    return [int(x) for x in format(state, f'0{num_nodes}b')]
+
 # Set up QAOA
 qaoa = QAOA(optimizer=COBYLA(maxiter=100), reps=2, sampler=Sampler())
 
@@ -38,7 +42,7 @@ qaoa = QAOA(optimizer=COBYLA(maxiter=100), reps=2, sampler=Sampler())
 operator = create_maxcut_operator(G, weights)
 result = qaoa.compute_minimum_eigenvalue(operator)
 optimal_value = -result.eigenvalue.real
-solution = result.best_measurement['state']
+solution = state_to_binary(result.best_measurement['state'], G.number_of_nodes())
 
 # Visualize results
 def plot_graph(G, solution):
@@ -47,7 +51,7 @@ def plot_graph(G, solution):
     nx.draw(G, pos, node_color=colors, with_labels=True)
     plt.title(f"Max-Cut Solution (Value: {optimal_value:.2f})")
     plt.savefig("maxcut_solution.png")
-    plt.show()
+    plt.close()
 
 print(f"Optimal Cut Value: {optimal_value:.2f}")
 print(f"Best Configuration: {solution}")
